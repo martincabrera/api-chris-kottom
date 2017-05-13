@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  creater: one
+  title: MyString
+  archived: false
+
+two:
+  creater: two
+  title: MyString
+  archived: false
