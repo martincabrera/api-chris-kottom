@@ -1,7 +1,7 @@
 require 'spec_helper'
 require 'rails_helper'
 
-describe UsersController, type: :controller do
+describe V2::UsersController, type: :controller do
   include JSONService::Helpers
 
   before(:each) do
@@ -9,6 +9,7 @@ describe UsersController, type: :controller do
       user_name = "user#{time}".to_sym
       FactoryGirl.create(user_name)
     end
+    @request.host = 'localhost:3000'
   end
 
   describe 'GET /users' do
@@ -47,10 +48,10 @@ describe UsersController, type: :controller do
       expect(admin.email).to eq(response_user['email'])
       expect(admin.gravatar_url).to eq(response_user['gravatar_url'])
 
-      self_link = {'rel' => 'self', 'href' => user_url(admin)}
+      self_link = {'rel' => 'self', 'href' => v2_user_url(admin)}
       expect(self_link).to match_link(response_user['links'])
 
-      boards_link = {'rel' => 'boards', 'href' => user_boards_url(admin)}
+      boards_link = {'rel' => 'boards', 'href' => v2_user_boards_url(admin)}
       expect(boards_link).to match_link(response_user['links'])
     end
 
@@ -79,10 +80,10 @@ describe UsersController, type: :controller do
       it "saves the new user in the database" do
 
         user_attributes = {
-              email: 'jim@example.com',
-              password: 'secret',
-              password_confirmation: 'secret'
-          }
+            email: 'jim@example.com',
+            password: 'secret',
+            password_confirmation: 'secret'
+        }
 
 
         expect {

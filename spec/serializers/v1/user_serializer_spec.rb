@@ -1,14 +1,12 @@
 require 'rails_helper'
 include Rails.application.routes.url_helpers
-include Serialization::Matchers
 
-RSpec.describe UserSerializer, :type => :serializer do
-include Serialization::Matchers
+RSpec.describe V1::UserSerializer, :type => :serializer do
   let(:user) {FactoryGirl.create(:admin)}
 
   it "serializes all visible attributes for a User" do
 
-    serializer = UserSerializer.new(user)
+    serializer = V1::UserSerializer.new(user)
     serialized_user = serializer.as_json
     user.attributes.keys.each do |key|
       next if key == "password_digest"
@@ -21,13 +19,13 @@ include Serialization::Matchers
     serialized_links = serialized_user[:links]
     expect(serialized_links.count).to eq 2
 
-    self_url = serialized_links.find { |url| url[:rel] == :self }
+    self_url = serialized_links.find {|url| url[:rel] == :self}
     expect(self_url).to_not be_nil
-    expect(self_url[:href]).to eq user_url(user)
+    expect(self_url[:href]).to eq v1_user_url(user)
 
-    boards_url = serialized_links.find { |url|  url[:rel] == :boards }
+    boards_url = serialized_links.find {|url| url[:rel] == :boards}
     expect(boards_url).to_not be_nil
-    expect(boards_url[:href]).to eq user_boards_url(user)
+    expect(boards_url[:href]).to eq v1_user_boards_url(user)
   end
 
   it "includes currently active boards created by the user" do
@@ -46,7 +44,7 @@ include Serialization::Matchers
 
   def serialized_user(local_user = nil)
     local_user ||= user
-    UserSerializer.new(local_user).as_json
+    V1::UserSerializer.new(local_user).as_json
   end
 
 end

@@ -1,4 +1,5 @@
-class BoardsController < ApplicationController
+class V2
+  ::BoardsController < ApplicationController
   before_action :set_user, only: [:index]
   before_action :set_board, only: [:show, :update, :destroy]
 

@@ -1,4 +1,4 @@
-class UsersController < ApplicationController
+class V2::UsersController < ApplicationController
   before_action :set_user, only: [:show, :update, :destroy]
 
   # GET /users
@@ -22,7 +22,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
-      render json: @user, status: :created, location: @user
+      render json: @user, status: :created, location: [:v2, @user]
     else
       render json: @user.errors, status: :unprocessable_entity
     end
