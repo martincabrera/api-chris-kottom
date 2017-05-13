@@ -3,10 +3,12 @@ class V2::UsersController < ApplicationController
 
   # GET /users
   def index
-    @users = User.all
+    page_number = params.dig(:page, :number) || 1
+    page_size = params.dig(:page, :size) || User.default_per_page
+    @users = User.page(page_number).per(page_size)
     included_rels = params[:include] || []
     if stale?(@users)
-      render json: @users, include: included_rels
+      render json: @users, include: included_rels, meta: pagination_meta(@users)
     end
   end
 

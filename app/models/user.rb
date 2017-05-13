@@ -1,7 +1,12 @@
 class User < ApplicationRecord
+
+  paginates_per 10
+
   include Gravatar
 
   has_secure_password
+
+
 
   has_many :boards, foreign_key: 'creator_id', dependent: :nullify
   has_many :lists, foreign_key: 'creator_id', dependent: :nullify
