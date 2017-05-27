@@ -23,6 +23,7 @@ gem 'thor', '0.19.1'
 gem 'active_model_serializers'
 
 gem 'kaminari'
+gem 'knock'
 
 
 # Use Capistrano for deployment
@@ -37,6 +38,7 @@ group :development, :test do
   gem 'dotenv-rails'
   gem 'rspec-rails', '~> 3.5'
   gem 'factory_girl_rails'
+  gem 'database_cleaner'
 end
 
 group :development do

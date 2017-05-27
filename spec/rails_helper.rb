@@ -9,6 +9,7 @@ require 'support/factory_girl'
 require 'support/serializer_spec_helper'
 require 'support/serialization'
 require 'support/json_service'
+require 'support/common_helpers'
 
 
 # Add additional requires below this line. Rails is not loaded until this point!

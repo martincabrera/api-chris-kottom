@@ -8,6 +8,7 @@
 
 
 Rails.application.routes.draw do
+
   concern :api_base do
     resources :users do
       resources :boards, only: [:index]
@@ -23,6 +24,11 @@ Rails.application.routes.draw do
 
     namespace :v2 do
       concerns :api_base
+    end
+
+    namespace :v3 do
+      concerns :api_base
+      post 'user_token' => 'user_token#create'
     end
   end
 end

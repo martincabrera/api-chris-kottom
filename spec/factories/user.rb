@@ -8,7 +8,7 @@ FactoryGirl.define do
   end
   # This will use the User class (Admin would have been guessed)
   factory :admin, class: User do
-    email "admin@example.com"
+    email "admi3n@example.com"
     password_digest BCrypt::Password.create('secret')
     admin true
   end
