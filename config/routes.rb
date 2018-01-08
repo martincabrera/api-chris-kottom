@@ -16,7 +16,7 @@ Rails.application.routes.draw do
     resources :boards
   end
 
-  subdomain = ENV.fetch('API_SUBDOMAIN', '')
+  subdomain = ENV.fetch('API_SUBDOMAIN', 'api')
   constraints subdomain: subdomain do
     namespace :v1 do
       concerns :api_base
@@ -29,6 +29,10 @@ Rails.application.routes.draw do
     namespace :v3 do
       concerns :api_base
       post 'user_token' => 'user_token#create'
+    end
+
+    namespace :v4 do
+      concerns :api_base
     end
   end
 end
