@@ -5,7 +5,7 @@ class V4::BoardPreviewSerializer < V4::BaseSerializer
 
   def links
     [
-        link(:self, v2_board_url(object)),
+        link(:self, v4_board_url(object)),
     ]
   end
 end

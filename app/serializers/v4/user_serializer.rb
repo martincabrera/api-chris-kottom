@@ -17,8 +17,8 @@ class V4::UserSerializer < V4::BaseSerializer
 
   def links
     [
-        link(:self, v2_user_url(object)),
-        link(:boards, v2_user_boards_url(object))
+        link(:self, v4_user_url(object)),
+        link(:boards, v4_user_boards_url(object))
     ]
   end
 
